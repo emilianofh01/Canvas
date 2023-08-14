@@ -21,3 +21,15 @@ ctx.lineTo(300, 450);
 ctx.lineTo(450, 450);
 ctx.lineTo(350, 350);
 ctx.fill();
+
+
+// Act 4 
+ctx.beginPath();
+ctx.arc(400, 75, 50, 0, 2 * Math.PI);
+ctx.stroke();
+
+
+ctx.beginPath();
+ctx.arc(280, 75, 50, 0, 2 * Math.PI);
+ctx.stroke();
+ctx.fill();
