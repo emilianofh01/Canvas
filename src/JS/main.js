@@ -33,3 +33,37 @@ ctx.beginPath();
 ctx.arc(280, 75, 50, 0, 2 * Math.PI);
 ctx.stroke();
 ctx.fill();
+
+// Act 6 
+ctx.font = "50px sans-serif";
+ctx.fillStyle = "red"
+ctx.fillText("JELOUU", 0 , 300);
+ctx.strokeText("JELOUU", 0 , 350);
+
+// Act 7
+const gradient = ctx.createLinearGradient(0, 500, 500, 500);
+
+gradient.addColorStop(0, "green");
+gradient.addColorStop(0.5,"cyan");
+gradient.addColorStop(1,"green");
+
+ctx.fillStyle = gradient;
+ctx.fillRect(0, 500, 500,500);
+
+// Act 8
+const gradient2 = ctx.createRadialGradient(610, 610 ,30, 610, 610, 80);
+
+gradient2.addColorStop(0, "yellow");
+gradient2.addColorStop(0.5, "blue");
+gradient2.addColorStop(1, "green");
+
+ctx.fillStyle = gradient2;
+ctx.fillRect(530, 530, 160, 160);
+
+// Act 9
+const img = document.getElementById("img1");
+
+window.onload = () => {
+    ctx.drawImage(img, 550,250, 300,250);
+}
+
