@@ -1,7 +1,7 @@
 let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 
-ctx.fillStyle = "#7d88e5";
+/*ctx.fillStyle = "#7d88e5";
 ctx.fillRect(0,0, 100, 100);
 ctx.fillStyle = "#cd0009";
 ctx.fillRect(80,80, 100, 100);
@@ -65,5 +65,12 @@ const img = document.getElementById("img1");
 
 window.onload = () => {
     ctx.drawImage(img, 550,250, 300,250);
-}
+} */
 
+canvas.addEventListener("click", ({clientX, clientY}) => {
+    ctx.beginPath();
+  ctx.arc(clientX, clientY, 50, 0, 2 * Math.PI);
+  ctx.stroke();
+  ctx.fillStyle = `rgba(32, 33, 36, 0.25)`;
+  ctx.fill();
+});
