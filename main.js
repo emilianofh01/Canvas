@@ -66,11 +66,25 @@ const img = document.getElementById("img1");
 window.onload = () => {
     ctx.drawImage(img, 550,250, 300,250);
 } */
+ctx.fillStyle = `rgba(32, 33, 36, 0.25)`;
 
-canvas.addEventListener("click", ({clientX, clientY}) => {
-    ctx.beginPath();
-  ctx.arc(clientX, clientY, 50, 0, 2 * Math.PI);
-  ctx.stroke();
-  ctx.fillStyle = `rgba(32, 33, 36, 0.25)`;
+canvas.addEventListener("click", ({ clientX, clientY }) => {
+  ctx.beginPath();
+  if(figura) {
+    ctx.arc(clientX, clientY, 50, 0, 2 * Math.PI);
+  } else {
+    ctx.fillRect(clientX - 50, clientY - 50, 100, 100);
+    ctx.strokeRect(clientX - 50, clientY - 50, 100, 100);
+  }
+
   ctx.fill();
+  ctx.stroke();
 });
+
+canvas.addEventListener('mouseover', function() {
+    this.random = () => Math.random() * 255;
+    ctx.fillStyle = `rgba(${this.random()}, ${this.random()}, ${this.random()}, 0.25)`;
+});
+
+let figura = false;
+canvas.addEventListener('mouseout', () => figura = !figura);
