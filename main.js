@@ -86,5 +86,15 @@ canvas.addEventListener('mouseover', function() {
     ctx.fillStyle = `rgba(${this.random()}, ${this.random()}, ${this.random()}, 0.25)`;
 });
 
+canvas.addEventListener('mousemove', ({clientX, clientY}) => {
+  let aux = ctx.fillStyle;
+  ctx.beginPath();
+  ctx.fillStyle = `rgba(0, 0, 0, 1)`;
+  ctx.arc(clientX, clientY, 2, 0, 2 * Math.PI);
+  ctx.fill();
+
+  ctx.fillStyle = aux;
+})
+
 let figura = false;
 canvas.addEventListener('mouseout', () => figura = !figura);
