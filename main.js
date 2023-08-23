@@ -1,5 +1,6 @@
 let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
+let onpress = false;
 
 /*ctx.fillStyle = "#7d88e5";
 ctx.fillRect(0,0, 100, 100);
@@ -69,6 +70,29 @@ window.onload = () => {
 ctx.fillStyle = `rgba(32, 33, 36, 0.25)`;
 
 canvas.addEventListener("click", ({ clientX, clientY }) => {
+  
+});
+
+canvas.addEventListener('mouseover', function() {
+    this.random = () => Math.random() * 255;
+    ctx.fillStyle = `rgba(${this.random()}, ${this.random()}, ${this.random()}, 0.25)`;
+});
+
+canvas.addEventListener('mousemove', ({clientX, clientY}) => {
+  let aux = ctx.fillStyle;
+
+  if(onpress) {
+    ctx.beginPath();
+    ctx.fillStyle = `rgba(0, 0, 0, 1)`;
+    ctx.arc(clientX, clientY, 2, 0, 2 * Math.PI);
+    ctx.fill();
+  
+    ctx.fillStyle = aux;
+  }
+})
+
+canvas.addEventListener('mousedown', ({clientX, clientY}) => {
+  onpress = true;
   ctx.beginPath();
   if(figura) {
     ctx.arc(clientX, clientY, 50, 0, 2 * Math.PI);
@@ -79,22 +103,9 @@ canvas.addEventListener("click", ({ clientX, clientY }) => {
 
   ctx.fill();
   ctx.stroke();
-});
-
-canvas.addEventListener('mouseover', function() {
-    this.random = () => Math.random() * 255;
-    ctx.fillStyle = `rgba(${this.random()}, ${this.random()}, ${this.random()}, 0.25)`;
-});
-
-canvas.addEventListener('mousemove', ({clientX, clientY}) => {
-  let aux = ctx.fillStyle;
-  ctx.beginPath();
-  ctx.fillStyle = `rgba(0, 0, 0, 1)`;
-  ctx.arc(clientX, clientY, 2, 0, 2 * Math.PI);
-  ctx.fill();
-
-  ctx.fillStyle = aux;
 })
+
+canvas.addEventListener('mouseup', () => onpress = false)
 
 let figura = false;
 canvas.addEventListener('mouseout', () => figura = !figura);
