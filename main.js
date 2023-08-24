@@ -119,12 +119,13 @@ let coord = {
 
 canvas.focus()
 canvas.addEventListener("keydown", function (e) {
+  const {floor, min, max} = Math;
+
+  this.random = (limit) => floor(Math.random() * limit);
+  
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  this.random = (limit) => Math.floor(Math.random() * limit);
-  coord.x += keys.x[e.key.toLowerCase()] ?? 0;
-  coord.y += keys.y[e.key.toLowerCase()] ?? 0;
-
+  coord.x = min(max(coord.x + (keys.x[e.key.toLowerCase()] ?? 0), 0), canvas.height - figure.width);
+  coord.y = min(max(coord.y + (keys.y[e.key.toLowerCase()] ?? 0), 0), canvas.height - figure.height);
   ctx.fillStyle = `
     rgba(${this.random(255)}, ${this.random(255)}, ${this.random(255)}, 0.65)
   `;
