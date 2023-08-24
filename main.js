@@ -122,8 +122,8 @@ canvas.addEventListener("keydown", function (e) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   this.random = (limit) => Math.floor(Math.random() * limit);
-  coord.x += keys.x[e.key] ?? 0;
-  coord.y += keys.y[e.key] ?? 0;
+  coord.x += keys.x[e.key.toLowerCase()] ?? 0;
+  coord.y += keys.y[e.key.toLowerCase()] ?? 0;
 
   ctx.fillStyle = `
     rgba(${this.random(255)}, ${this.random(255)}, ${this.random(255)}, 0.65)
