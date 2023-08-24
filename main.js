@@ -109,21 +109,26 @@ window.onload = () => {
 
 // let figura = false;
 // canvas.addEventListener('mouseout', () => figura = !figura);
-let coord = { x: (canvas.width/2) - 50, y: (canvas.height/2) - 50 };
 const keys = { x: { a: -10, d: 10 }, y: { w: -10, s: 10 } };
-const figure = {width: 100, height: 100};
+const figure = { width: 100, height: 100 };
 
+let coord = {
+  x: Math.floor(canvas.width / 2 - figure.width / 2),
+  y: Math.floor(canvas.height / 2 - figure.height / 2),
+};
+
+canvas.focus()
 canvas.addEventListener("keydown", function (e) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
   this.random = (limit) => Math.floor(Math.random() * limit);
   coord.x += keys.x[e.key] ?? 0;
   coord.y += keys.y[e.key] ?? 0;
 
-  console.log(e);
+  ctx.fillStyle = `
+    rgba(${this.random(255)}, ${this.random(255)}, ${this.random(255)}, 0.65)
+  `;
 
-  ctx.fillStyle = `rgba(${this.random(255)}, ${this.random(255)}, ${this.random(
-    255
-  )}, 0.65)`;
   ctx.fillRect(coord.x, coord.y, figure.width, figure.height);
-
   ctx.strokeRect(coord.x, coord.y, figure.width, figure.height);
 });
