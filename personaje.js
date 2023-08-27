@@ -17,8 +17,13 @@ class Grid {
   render() {
     let { context, x, y } = this;
 
-    context.strokeStyle = "#000";
-    context.lineWidth = 0.25;
+    const grd = ctx.createLinearGradient(0, 200, 200, 0);
+    grd.addColorStop(0, "yellow");
+    grd.addColorStop(0.5, "purple");
+    grd.addColorStop(1, "white");
+
+    context.strokeStyle = grd;
+    context.lineWidth = 1;
     context.strokeRect(x, y, this.width, this.height);
   }
 
@@ -234,12 +239,9 @@ let path = {
     { from: { x: 24, y: 23 }, to: { x: 26, y: 24 } },
     { from: { x: 27, y: 45 }, to: { x: 28, y: 46 } },
 
-
-
     { x: 44, y: 15 },
     { x: 27, y: 23 },
     { x: 29, y: 45 },
-
 
   ],
   "#fdd0f1": [
@@ -382,7 +384,6 @@ let path = {
     { x: 41, y: 6 },
     { x: 44, y: 9 },
 
-
   ],
   "#d90258": [
     { from: { x: 22, y: 43 }, to: { x: 26, y: 48 } },
@@ -439,8 +440,6 @@ let path = {
     { from: { x: 22, y: 26 }, to: { x: 25, y: 28} },
     { from: { x: 34, y: 24 }, to: { x: 34, y: 26} },
 
-
-
     { x: 27, y: 48 },
   ],
   "#97023f": [
@@ -457,7 +456,6 @@ let path = {
     { from: { x: 15, y: 39 }, to: { x: 18, y: 39 } },
     { from: { x: 16, y: 40 }, to: { x: 17, y: 40 } },
     { from: { x: 27, y: 38 }, to: { x: 28, y: 38 } },
-
 
     { x: 27, y: 48 },
     { x: 33, y: 31 },
@@ -479,7 +477,6 @@ let path = {
     { from: { x: 35, y: 39 }, to: { x: 35, y: 40 } },
     { from: { x: 31, y: 42 }, to: { x: 32, y: 43 } },
     { from: { x: 35, y: 37 }, to: { x: 37, y: 37 } },
-
 
     { x: 30, y: 42 },
     { x: 33, y: 42 },
