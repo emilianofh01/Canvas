@@ -113,8 +113,8 @@ const keys = { x: { a: -10, d: 10 }, y: { w: -10, s: 10 } };
 const figure = { width: 100, height: 100 };
 
 let coord = {
-  x: Math.floor(canvas.width / 2 - figure.width / 2),
-  y: Math.floor(canvas.height / 2 - figure.height / 2),
+  x: Math.floor((canvas.width / 2) - (figure.width / 2)),
+  y: Math.floor((canvas.height / 2) - (figure.height / 2)),
 };
 
 canvas.focus()
@@ -124,7 +124,7 @@ canvas.addEventListener("keydown", function (e) {
   this.random = (limit) => floor(Math.random() * limit);
   
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  coord.x = min(max(coord.x + (keys.x[e.key.toLowerCase()] ?? 0), 0), canvas.height - figure.width);
+  coord.x = min(max(coord.x + (keys.x[e.key.toLowerCase()] ?? 0), 0), canvas.width - figure.width);
   coord.y = min(max(coord.y + (keys.y[e.key.toLowerCase()] ?? 0), 0), canvas.height - figure.height);
   ctx.fillStyle = `
     rgba(${this.random(255)}, ${this.random(255)}, ${this.random(255)}, 0.65)
