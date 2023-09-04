@@ -19,11 +19,11 @@
 </head>
 
 <body>
-    <canvas id="mycanvas" width="800" height="800"></canvas>
+    <canvas id="mycanvas" width="3808" height="3808"></canvas>
     <script>
         const canvas = document.getElementById("mycanvas");
         const ctx = canvas.getContext("2d");
-            ctx.scale(0.84, 0.84);
+            ctx.scale(4, 4);
 
             // Fondo
             ctx.fillStyle = "#9caad7";
@@ -190,7 +190,7 @@
             ctx.lineTo(0,680)
             ctx.lineTo(0, 376)
 
-            const gradient3 = ctx.createLinearGradient(000, 200, 550, 200);
+            const gradient3 = ctx.createLinearGradient(0, 200, 550, 200);
             gradient3.addColorStop(0, "#00707c");
             gradient3.addColorStop(1, "#02505b");
             ctx.fillStyle = gradient3;
