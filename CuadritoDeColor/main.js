@@ -109,6 +109,45 @@ window.onload = () => {
 
 // let figura = false;
 // canvas.addEventListener('mouseout', () => figura = !figura);
+
+class Rectangulo {
+  constructor(x,y,width, height, context, playable = false) {
+    this.width = width;
+    this.height = height;
+    this.ctx = context;
+    this.playable = playable;
+
+    this.coord = {
+      x: x,
+      y: y
+    }
+    this.paint()
+  }
+
+  random(limit) {
+    return Math.floor(Math.random() * limit)
+  }
+
+  paint() {
+    this.ctx.fillStyle = this.playable ? `
+    rgba(${this.random(255)}, ${this.random(255)}, ${this.random(255)}, 0.65)
+  ` : "#000";
+
+    this.ctx.fillRect(this.coord.x, this.coord.y, this.width, this.height);
+    this.ctx.strokeRect(this.coord.x, this.coord.y, this.width, this.height);
+  }
+  seTocan(target) {
+    let {x, y} = this.coord;
+    let {x:targetX, y:targetY} = target.coord;
+
+    console.log(`${this.coord.x},${this.coord.x+this.width} - ${target.coord.x}, ${target.coord.x+target.width}`);
+    
+    return x < targetX + target.width &&
+           x + this.width > targetX &&
+           y < targetY + target.height &&
+           y + this.height > targetY;
+  }
+}
 const keys = { x: { a: -10, d: 10 }, y: { w: -10, s: 10 } };
 const figure = { width: 100, height: 100 };
 
@@ -129,34 +168,38 @@ let coord = {
 };
 
 let lastKey = "_";
+let player = new Rectangulo(coord.x, coord.y, figure.width, figure.height, ctx, true);
+let other = new Rectangulo(400, 400, 50, 50, ctx);
 
 canvas.focus();
 canvas.addEventListener("keydown", (e) => {
   lastKey = e.key;
 });
 
-function upadte(loop) {
+function update(loop) {
   const { floor, min, max } = Math;
 
   this.random = (limit) => floor(Math.random() * limit);
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  coord.x = min(
-    max(coord.x + (keys.x[lastKey.toLowerCase()] ?? 0), 0),
+
+  player.coord.x = min(
+    max(player.coord.x + (keys.x[lastKey.toLowerCase()] ?? 0), 0),
     canvas.width - figure.width
   );
-  coord.y = min(
-    max(coord.y + (keys.y[lastKey.toLowerCase()] ?? 0), 0),
+  player.coord.y = min(
+    max(player.coord.y + (keys.y[lastKey.toLowerCase()] ?? 0), 0),
     canvas.height - figure.height
   );
-  ctx.fillStyle = `
-    rgba(${this.random(255)}, ${this.random(255)}, ${this.random(255)}, 0.65)
-  `;
 
-  ctx.fillRect(coord.x, coord.y, figure.width, figure.height);
-  ctx.strokeRect(coord.x, coord.y, figure.width, figure.height);
+  player.paint();
+  other.paint();
+  if(player.seTocan(other)) {
+    other.coord.x = Math.floor(Math.random()*(500-other.width));
+    other.coord.y = Math.floor(Math.random()*(500-other.height));
+  }
 
-  requestAnimationFrame(upadte);
+  requestAnimationFrame(update);
 }
 
-window.requestAnimationFrame(upadte);
+window.requestAnimationFrame(update);
