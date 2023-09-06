@@ -67,6 +67,7 @@ async function init() {
   setFloorPattern();
   drawTree(2,341);
   drawTree(43,341);
+
   drawEmptyBlock(2, 233)
   drawEmptyBlock(43, 233, true);
   drawEmptyBlock(127, 126, true);
